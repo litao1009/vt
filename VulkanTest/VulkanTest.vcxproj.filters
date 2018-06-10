@@ -21,12 +21,33 @@
     <ClCompile Include="VkLoader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CVkInstance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CVkGlobalInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CVkDevice.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VKFunc.h">
+    <ClInclude Include="VkLoader.h">
       <Filter>源文件</Filter>
     </ClInclude>
-    <ClInclude Include="VkLoader.h">
+    <ClInclude Include="CVkInstance.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CVkGlobalInfo.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CVkPhysicalDevice.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VKHeader.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CVkDevice.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

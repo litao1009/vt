@@ -3,18 +3,22 @@
 #include <memory>
 #include <string>
 
-class   VkLoader
+class VkLoader
 {
-    class   Imp;
-    std::unique_ptr<Imp>    ImpUPtr_;
-    
-public:
+    class Imp;
+    std::unique_ptr<Imp> ImpUPtr_;
 
+public:
     VkLoader();
 
     ~VkLoader();
 
 public:
+    static VkLoader& GetInstance();
 
-    bool    Load(const std::string& path);
+public:
+
+    bool LoadLibrary( const std::string& path );
+
+	bool LoadGlobalFunction();
 };
