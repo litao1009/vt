@@ -28,5 +28,7 @@ public:
         result.pfnFree               = &Free;
         result.pfnInternalAllocation = nullptr;
         result.pfnInternalFree       = nullptr;
+
+        return result;
     }
 };

@@ -2,6 +2,7 @@
 
 #include "VKHeader.h"
 #include "CVkPhysicalDevice.h"
+#include "CVkAllocator.h"
 
 #include <vector>
 
@@ -15,6 +16,8 @@ public://Parameter
     VkInstanceCreateInfo     CreateInfo = {VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO, nullptr, 0, &AppInfo, 0, nullptr, 0, nullptr};
     std::vector<const char*> EnabledLayers;
     std::vector<const char*> EnabledExtensions;
+    CVkAllocator             Allocator;
+    VkAllocationCallbacks    AllocationCallbacks;
 
 public://Query
     std::vector<CVkPhysicalDevice> EnumeratePhysicalDevices;

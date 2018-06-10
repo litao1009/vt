@@ -5,6 +5,7 @@
 bool CVkInstance::Create()
 {
     //Layers.push_back("VK_LAYER_LUNARG_standard_validation");
+    AllocationCallbacks = Allocator;
 
     if ( !EnabledLayers.empty() )
     {
@@ -18,7 +19,7 @@ bool CVkInstance::Create()
         CreateInfo.ppEnabledExtensionNames = EnabledExtensions.data();
     }
 
-    if ( VK_SUCCESS != vkCreateInstance( &CreateInfo, nullptr, &Instance ) )
+    if ( VK_SUCCESS != vkCreateInstance( &CreateInfo, &AllocationCallbacks, &Instance ) )
     {
         std::cout << "Create Instance Failed" << std::endl;
         return false;
@@ -237,6 +238,6 @@ bool CVkInstance::Create()
 
 bool CVkInstance::Destory()
 {
-    vkDestroyInstance( Instance, nullptr );
+    vkDestroyInstance( Instance, &AllocationCallbacks );
     return true;
 }
