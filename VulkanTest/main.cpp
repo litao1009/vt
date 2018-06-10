@@ -3,6 +3,7 @@
 #include "VkLoader.h"
 #include "CVkInstance.h"
 #include "CVkDevice.h"
+#include "CVkAllocator.h"
 
 #include <iostream>
 
