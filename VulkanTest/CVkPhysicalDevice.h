@@ -12,4 +12,6 @@ public:
     VkPhysicalDeviceFeatures             PhysicalDeviceFeatures;
     VkPhysicalDeviceMemoryProperties     PhysicalDeviceMemoryProperties;
     std::vector<VkQueueFamilyProperties> QueueFamilyProperties;
+    std::vector<VkLayerProperties>       PhysicalDeviceLayerProperties;
+    std::vector<VkExtensionProperties>   PhysicalDeviceExtensionProperties;
 };

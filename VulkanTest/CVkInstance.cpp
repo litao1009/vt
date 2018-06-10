@@ -188,6 +188,7 @@ bool CVkInstance::Create()
     GET_INSTANCE_FUNC( vkUpdateDescriptorSetWithTemplate )
 
     uint32_t                      count{};
+    
     std::vector<VkPhysicalDevice> enumeratePhysicalDevices;
     vkEnumeratePhysicalDevices( Instance, &count, nullptr );
     if ( count != 0 )
@@ -206,12 +207,28 @@ bool CVkInstance::Create()
         vkGetPhysicalDeviceFeatures( curPDInfo.PhysicalDevice, &curPDInfo.PhysicalDeviceFeatures );
         vkGetPhysicalDeviceMemoryProperties( curPDInfo.PhysicalDevice, &curPDInfo.PhysicalDeviceMemoryProperties );
 
-        uint32_t qc{};
-        vkGetPhysicalDeviceQueueFamilyProperties( curPDInfo.PhysicalDevice, &qc, nullptr );
-        if ( qc != 0 )
+        count = 0;
+        vkGetPhysicalDeviceQueueFamilyProperties( curPDInfo.PhysicalDevice, &count, nullptr );
+        if ( count != 0 )
         {
-            curPDInfo.QueueFamilyProperties.resize( qc );
-            vkGetPhysicalDeviceQueueFamilyProperties( curPDInfo.PhysicalDevice, &qc, curPDInfo.QueueFamilyProperties.data() );
+            curPDInfo.QueueFamilyProperties.resize( count );
+            vkGetPhysicalDeviceQueueFamilyProperties( curPDInfo.PhysicalDevice, &count, curPDInfo.QueueFamilyProperties.data() );
+        }
+
+        count = 0;
+        vkEnumerateDeviceLayerProperties( curPDInfo.PhysicalDevice, &count, nullptr );
+        if ( count != 0 )
+        {
+            curPDInfo.PhysicalDeviceLayerProperties.resize( count );
+            vkEnumerateDeviceLayerProperties( curPDInfo.PhysicalDevice, &count, curPDInfo.PhysicalDeviceLayerProperties.data() );
+        }
+
+        count = 0;
+        vkEnumerateDeviceExtensionProperties( curPDInfo.PhysicalDevice, nullptr, &count, nullptr );
+        if ( count != 0 )
+        {
+            curPDInfo.PhysicalDeviceExtensionProperties.resize( count );
+            vkEnumerateDeviceExtensionProperties( curPDInfo.PhysicalDevice, nullptr, &count, curPDInfo.PhysicalDeviceExtensionProperties.data() );
         }
     }
 

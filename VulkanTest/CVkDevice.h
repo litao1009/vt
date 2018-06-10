@@ -33,6 +33,7 @@ public:
         nullptr};
     CVkPhysicalDevice PhysicalDevice;
     CVkInstance*      Instance{};
+    std::vector<VkDeviceQueueCreateInfo> DeviceQueueCreateInfo;
 
 public:
     bool Create();
