@@ -152,8 +152,10 @@
   <ItemGroup>
     <ClCompile Include="CVkAllocator.cpp" />
     <ClCompile Include="CVkBuffer.cpp" />
+    <ClCompile Include="CVkDebugReporter.cpp" />
     <ClCompile Include="CVkDevice.cpp" />
     <ClCompile Include="CVkGlobalInfo.cpp" />
+    <ClCompile Include="CVkImage.cpp" />
     <ClCompile Include="CVkInstance.cpp" />
     <ClCompile Include="CVkPhysicalDevice.cpp" />
     <ClCompile Include="main.cpp" />
@@ -162,8 +164,10 @@
   <ItemGroup>
     <ClInclude Include="CVkAllocator.h" />
     <ClInclude Include="CVkBuffer.h" />
+    <ClInclude Include="CVkDebugReporter.h" />
     <ClInclude Include="CVkDevice.h" />
     <ClInclude Include="CVkGlobalInfo.h" />
+    <ClInclude Include="CVkImage.h" />
     <ClInclude Include="CVkInstance.h" />
     <ClInclude Include="CVkPhysicalDevice.h" />
     <ClInclude Include="InstanceFunctionTable.h" />

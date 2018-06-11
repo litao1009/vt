@@ -5,6 +5,8 @@
 #include "CVkDevice.h"
 #include "CVkAllocator.h"
 #include "CVkBuffer.h"
+#include "CVkImage.h"
+#include "CVkDebugReporter.h"
 
 #include <iostream>
 
@@ -42,7 +44,12 @@ int main()
     CVkGlobalInfo::GetInstance().QueryInstanceInfo();
 
     CVkInstance instance;
+    instance.EnabledLayers.push_back( "VK_LAYER_LUNARG_standard_validation" );
+    instance.EnabledExtensions.push_back( "VK_EXT_debug_report" );
     instance.Create();
+
+    CVkDebugReporter reporter;
+    reporter.Init( instance.InstanceHandle );
 
     CVkDevice device;
     {
@@ -70,9 +77,24 @@ int main()
     buffer.Device                 = &device;
 
     buffer.Create();
-    
+
+    CVkImage image;
+    image.Device = &device;
+    image.Create();
+
+    VkImageSubresource is;
+    is.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    is.mipLevel   = 0;
+    is.arrayLayer = 0;
+    VkSubresourceLayout sl;
+    instance.FunctionTable.vkGetImageSubresourceLayout( device.DeviceHandle, image.ImageHandle, &is, &sl );
+
+    image.Destory();
+
     buffer.Destory();
 
     device.Destory();
+
+    reporter.UnInit();
     instance.Destory();
 }

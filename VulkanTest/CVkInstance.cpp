@@ -4,7 +4,7 @@
 
 bool CVkInstance::Create()
 {
-    //Layers.push_back("VK_LAYER_LUNARG_standard_validation");
+    //EnabledLayers.push_back( "VK_LAYER_LUNARG_standard_validation" );
 
     if ( !EnabledLayers.empty() )
     {

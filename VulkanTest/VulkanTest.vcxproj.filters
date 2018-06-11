@@ -39,6 +39,12 @@
     <ClCompile Include="CVkPhysicalDevice.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CVkImage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CVkDebugReporter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VkLoader.h">
@@ -66,6 +72,12 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="InstanceFunctionTable.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CVkImage.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CVkDebugReporter.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
