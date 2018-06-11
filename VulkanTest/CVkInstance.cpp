@@ -5,7 +5,6 @@
 bool CVkInstance::Create()
 {
     //Layers.push_back("VK_LAYER_LUNARG_standard_validation");
-    AllocationCallbacks = Allocator;
 
     if ( !EnabledLayers.empty() )
     {
@@ -19,13 +18,13 @@ bool CVkInstance::Create()
         CreateInfo.ppEnabledExtensionNames = EnabledExtensions.data();
     }
 
-    if ( VK_SUCCESS != vkCreateInstance( &CreateInfo, &AllocationCallbacks, &Instance ) )
+    if ( VK_SUCCESS != vkCreateInstance( &CreateInfo, AllocationCallbacks, &InstanceHandle ) )
     {
         std::cout << "Create Instance Failed" << std::endl;
         return false;
     }
 
-#define GET_INSTANCE_FUNC( func ) func = (PFN_##func)vkGetInstanceProcAddr( Instance, #func );
+#define GET_INSTANCE_FUNC( func ) FunctionTable.func = (PFN_##func)vkGetInstanceProcAddr( InstanceHandle, #func );
 
     GET_INSTANCE_FUNC( vkDestroyInstance )
     GET_INSTANCE_FUNC( vkEnumeratePhysicalDevices )
@@ -188,14 +187,14 @@ bool CVkInstance::Create()
     GET_INSTANCE_FUNC( vkDestroyDescriptorUpdateTemplate )
     GET_INSTANCE_FUNC( vkUpdateDescriptorSetWithTemplate )
 
-    uint32_t                      count{};
-    
+    uint32_t count{};
+
     std::vector<VkPhysicalDevice> enumeratePhysicalDevices;
-    vkEnumeratePhysicalDevices( Instance, &count, nullptr );
+    FunctionTable.vkEnumeratePhysicalDevices( InstanceHandle, &count, nullptr );
     if ( count != 0 )
     {
         enumeratePhysicalDevices.resize( count );
-        vkEnumeratePhysicalDevices( Instance, &count, enumeratePhysicalDevices.data() );
+        FunctionTable.vkEnumeratePhysicalDevices( InstanceHandle, &count, enumeratePhysicalDevices.data() );
     }
 
     for ( auto curPD : enumeratePhysicalDevices )
@@ -203,34 +202,10 @@ bool CVkInstance::Create()
         EnumeratePhysicalDevices.emplace_back();
         auto& curPDInfo = EnumeratePhysicalDevices.back();
 
-        curPDInfo.PhysicalDevice = curPD;
-        vkGetPhysicalDeviceProperties( curPDInfo.PhysicalDevice, &curPDInfo.PhysicalDeviceProperties );
-        vkGetPhysicalDeviceFeatures( curPDInfo.PhysicalDevice, &curPDInfo.PhysicalDeviceFeatures );
-        vkGetPhysicalDeviceMemoryProperties( curPDInfo.PhysicalDevice, &curPDInfo.PhysicalDeviceMemoryProperties );
+        curPDInfo.PhysicalDeviceHandle = curPD;
+        curPDInfo.InstanceFunctions    = FunctionTable;
 
-        count = 0;
-        vkGetPhysicalDeviceQueueFamilyProperties( curPDInfo.PhysicalDevice, &count, nullptr );
-        if ( count != 0 )
-        {
-            curPDInfo.QueueFamilyProperties.resize( count );
-            vkGetPhysicalDeviceQueueFamilyProperties( curPDInfo.PhysicalDevice, &count, curPDInfo.QueueFamilyProperties.data() );
-        }
-
-        count = 0;
-        vkEnumerateDeviceLayerProperties( curPDInfo.PhysicalDevice, &count, nullptr );
-        if ( count != 0 )
-        {
-            curPDInfo.PhysicalDeviceLayerProperties.resize( count );
-            vkEnumerateDeviceLayerProperties( curPDInfo.PhysicalDevice, &count, curPDInfo.PhysicalDeviceLayerProperties.data() );
-        }
-
-        count = 0;
-        vkEnumerateDeviceExtensionProperties( curPDInfo.PhysicalDevice, nullptr, &count, nullptr );
-        if ( count != 0 )
-        {
-            curPDInfo.PhysicalDeviceExtensionProperties.resize( count );
-            vkEnumerateDeviceExtensionProperties( curPDInfo.PhysicalDevice, nullptr, &count, curPDInfo.PhysicalDeviceExtensionProperties.data() );
-        }
+        curPDInfo.Query();
     }
 
     return true;
@@ -238,6 +213,6 @@ bool CVkInstance::Create()
 
 bool CVkInstance::Destory()
 {
-    vkDestroyInstance( Instance, &AllocationCallbacks );
+    FunctionTable.vkDestroyInstance( InstanceHandle, AllocationCallbacks );
     return true;
 }

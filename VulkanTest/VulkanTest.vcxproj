@@ -72,20 +72,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)build\bin\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\obj\$(ProjectName)\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
-    <IncludePath>E:\Repo\Vulkan\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\repoCode\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)build\bin\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\obj\$(ProjectName)\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
-    <IncludePath>E:\Repo\Vulkan\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\repoCode\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>E:\Repo\Vulkan\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\repoCode\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\bin\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\obj\$(ProjectName)\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>E:\Repo\Vulkan\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\repoCode\Vulkan-LoaderAndValidationLayers\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)build\bin\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\obj\$(ProjectName)\$(PlatformTarget)\$(PlatformToolset)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -151,18 +151,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CVkAllocator.cpp" />
+    <ClCompile Include="CVkBuffer.cpp" />
     <ClCompile Include="CVkDevice.cpp" />
     <ClCompile Include="CVkGlobalInfo.cpp" />
     <ClCompile Include="CVkInstance.cpp" />
+    <ClCompile Include="CVkPhysicalDevice.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="VkLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CVkAllocator.h" />
+    <ClInclude Include="CVkBuffer.h" />
     <ClInclude Include="CVkDevice.h" />
     <ClInclude Include="CVkGlobalInfo.h" />
     <ClInclude Include="CVkInstance.h" />
     <ClInclude Include="CVkPhysicalDevice.h" />
+    <ClInclude Include="InstanceFunctionTable.h" />
     <ClInclude Include="VKHeader.h" />
     <ClInclude Include="VkLoader.h" />
   </ItemGroup>

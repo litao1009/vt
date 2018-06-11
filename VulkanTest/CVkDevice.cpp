@@ -8,12 +8,12 @@ bool CVkDevice::Create()
         DeviceCreateInfo.pQueueCreateInfos    = DeviceQueueCreateInfo.data();
     }
 
-    auto ret = Instance->vkCreateDevice( PhysicalDevice.PhysicalDevice, &DeviceCreateInfo, nullptr, &Device );
+    auto ret = PhysicalDevice.InstanceFunctions.vkCreateDevice( PhysicalDevice.PhysicalDeviceHandle, &DeviceCreateInfo, AllocationCallbacks, &DeviceHandle );
     return ret == VK_SUCCESS;
 }
 
 void CVkDevice::Destory()
 {
-    Instance->vkDeviceWaitIdle( Device );
-    Instance->vkDestroyDevice( Device, nullptr );
+    PhysicalDevice.InstanceFunctions.vkDeviceWaitIdle( DeviceHandle );
+    PhysicalDevice.InstanceFunctions.vkDestroyDevice( DeviceHandle, AllocationCallbacks );
 }

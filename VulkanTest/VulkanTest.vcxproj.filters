@@ -33,6 +33,12 @@
     <ClCompile Include="CVkAllocator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CVkBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CVkPhysicalDevice.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VkLoader.h">
@@ -54,6 +60,12 @@
       <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="CVkAllocator.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CVkBuffer.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InstanceFunctionTable.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

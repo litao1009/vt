@@ -7,7 +7,7 @@
 class CVkDevice
 {
 public:
-    VkDevice Device;
+    VkDevice DeviceHandle = VK_NULL_HANDLE;
 
 public:
     VkDeviceCreateInfo DeviceCreateInfo = {
@@ -31,8 +31,8 @@ public:
         nullptr,
         //pEnabledFeatrues
         nullptr};
-    CVkPhysicalDevice PhysicalDevice;
-    CVkInstance*      Instance{};
+    CVkPhysicalDevice                    PhysicalDevice;
+    VkAllocationCallbacks*               AllocationCallbacks{};
     std::vector<VkDeviceQueueCreateInfo> DeviceQueueCreateInfo;
 
 public:

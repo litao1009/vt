@@ -4,6 +4,7 @@
 #include "CVkInstance.h"
 #include "CVkDevice.h"
 #include "CVkAllocator.h"
+#include "CVkBuffer.h"
 
 #include <iostream>
 
@@ -12,7 +13,7 @@
 int main()
 {
     boost::filesystem::path loaderPath =
-        R"(E:\Repo\Vulkan\Vulkan-LoaderAndValidationLayers\)";
+        R"(E:\repoCode\Vulkan-LoaderAndValidationLayers\)";
 
     if ( sizeof( size_t ) == 4 )
     {
@@ -45,7 +46,6 @@ int main()
 
     CVkDevice device;
     {
-        device.Instance       = &instance;
         device.PhysicalDevice = instance.EnumeratePhysicalDevices[0];
         device.DeviceQueueCreateInfo.emplace_back();
         device.DeviceQueueCreateInfo[0].sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
@@ -64,6 +64,14 @@ int main()
     }
     device.Create();
 
+    CVkBuffer buffer;
+    buffer.BufferCreateInfo.flags = VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
+    buffer.BufferCreateInfo.size  = 1024 * 1024;
+    buffer.Device                 = &device;
+
+    buffer.Create();
+    
+    buffer.Destory();
 
     device.Destory();
     instance.Destory();
